@@ -6,9 +6,9 @@
 		http://www.springframework.org/schema/integration/http https://www.springframework.org/schema/integration/http/spring-integration-http.xsd"
        xmlns:int="http://www.springframework.org/schema/integration"
        xmlns:int-http="http://www.springframework.org/schema/integration/http">
-    
-    <int:channel id="httpGateWayReqChannel" />
-    <int:channel id="httpGateWayResChannel" />
+
+    <int:channel id="httpGateWayReqChannel"/>
+    <int:channel id="httpGateWayResChannel"/>
 
     <int-http:inbound-gateway id="httpGateWay"
                               supported-methods="GET, POST"
@@ -19,6 +19,33 @@
                               reply-timeout="150000">
     </int-http:inbound-gateway>
 
-    <int:service-activator id="serviceAct" ref="sampleService" input-channel="httpGateWayReqChannel"
-                           output-channel="httpGateWayResChannel" method="getEmp" send-timeout="150000"/>
+    <!-- Custom splitter. -->
+    <int:splitter id="splitter" input-channel="httpGateWayReqChannel" output-channel="splitterChannel" ref="searchRequestSplitter">
+    </int:splitter>
+
+    <!-- Splitter channel. -->
+    <int:channel id="splitterChannel"/>
+
+    <int:payload-type-router input-channel="splitterChannel">
+        <int:mapping type="java.lang.String" channel="stringChannel" />
+        <int:mapping type="java.lang.Integer" channel="integerChannel" />
+    </int:payload-type-router>
+
+    <int:channel id="stringChannel" />
+    <int:service-activator ref="stringService" input-channel="stringChannel"
+                           output-channel="aggInput" method="getEmp" send-timeout="150000"/>
+
+    <int:channel id="integerChannel" />
+    <int:service-activator ref="intService" input-channel="integerChannel"
+                           output-channel="aggInput" method="getEmp" send-timeout="150000"/>
+
+    <int:publish-subscribe-channel id="aggInput" />
+
+    <int:aggregator input-channel="aggInput" method="aggregate"
+                    ref="searchResultAggregator" output-channel="httpGateWayResChannel"
+                    message-store="resultMessageStore"
+                    send-partial-result-on-expiry="true">
+    </int:aggregator>
+
+    <bean id="resultMessageStore" class="org.springframework.integration.store.SimpleMessageStore" />
 </beans>
