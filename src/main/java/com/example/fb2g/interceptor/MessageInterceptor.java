@@ -16,6 +16,7 @@ public class MessageInterceptor implements ChannelInterceptor {
 
     @Override
     public Message<?> preSend(Message<?> message, MessageChannel channel) {
+        logger.info("###################Channel name: " + channel.toString());
         logger.info("sequenceNumber is {}", message.getHeaders().get("sequenceNumber").toString());
         logger.info("correlationId is {}", message.getHeaders().get("correlationId").toString());
         logger.info("payload is {}", message.getPayload());

@@ -43,7 +43,11 @@
     <int:service-activator ref="intService" input-channel="integerChannel"
                            output-channel="aggInput" method="getEmp" send-timeout="150000"/>
 
-    <int:publish-subscribe-channel id="aggInput" />
+    <int:publish-subscribe-channel id="aggInput">
+        <int:interceptors>
+            <ref bean="messageInterceptor"/>
+        </int:interceptors>
+    </int:publish-subscribe-channel>
 
     <int:aggregator input-channel="aggInput" method="aggregate"
                     ref="searchResultAggregator" output-channel="httpGateWayResChannel"
