@@ -24,7 +24,11 @@
     </int:splitter>
 
     <!-- Splitter channel. -->
-    <int:channel id="splitterChannel"/>
+    <int:channel id="splitterChannel">
+        <int:interceptors>
+            <ref bean="messageInterceptor"/>
+        </int:interceptors>
+    </int:channel>
 
     <int:payload-type-router input-channel="splitterChannel">
         <int:mapping type="java.lang.String" channel="stringChannel" />
