@@ -49,8 +49,18 @@
         </int:interceptors>
     </int:publish-subscribe-channel>
 
+    <!-- POJO used for aggregation. -->
+    <!--
     <int:aggregator input-channel="aggChannel" method="aggregate"
-                    ref="searchResultAggregator" output-channel="httpGateWayResChannel"
+                    ref="poJoAggregator" output-channel="httpGateWayResChannel"
+                    message-store="resultMessageStore"
+                    send-partial-result-on-expiry="true">
+    </int:aggregator>
+    -->
+
+    <!-- Custom MessageGroupProcessor used for aggregation.  -->
+    <int:aggregator input-channel="aggChannel" method="aggregatePayloads"
+                    ref="groupProcessorAggregator" output-channel="httpGateWayResChannel"
                     message-store="resultMessageStore"
                     send-partial-result-on-expiry="true">
     </int:aggregator>

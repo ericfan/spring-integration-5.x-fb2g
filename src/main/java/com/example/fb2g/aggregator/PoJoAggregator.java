@@ -11,7 +11,7 @@ import java.util.Collection;
 import java.util.List;
 
 @Component
-public class SearchResultAggregator {
+public class PoJoAggregator {
 
     public List<ResponseBean> aggregate(Collection<Object> results) {
         List<ResponseBean> resList = new ArrayList<>();
