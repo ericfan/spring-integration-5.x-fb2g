@@ -31,6 +31,7 @@ List of Message Endpoints:
 
 | Endpoint Name | Unidirectional | Bidirectional | Input | Output | Middle | Poll | Listen | Generic | Specific |
 | --- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| **Channel Adapter** | :white_check_mark: | :x: | :white_check_mark: | :white_check_mark: | :x: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
 
 * **Channel Adapter** - unidirectional, input/output, poll/listen, generic/tech-specific
 * **Service Activator** - unidirectional/bidirectional, output/middle, poll/listen, generic
