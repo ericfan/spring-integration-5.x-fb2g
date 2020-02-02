@@ -38,22 +38,18 @@
     </int:payload-type-router>
 
     <int:channel id="stringChannel">
-        <int:queue capacity="10" />
     </int:channel>
     <int:service-activator ref="stringService" input-channel="stringChannel"
                            output-channel="aggChannel" method="getEmp" send-timeout="150000">
-        <int:poller receive-timeout="3000" max-messages-per-poll="1" task-executor="threadPoolTaskExecutor" fixed-delay="10"/>
     </int:service-activator>
     
     <int:channel id="integerChannel">
-        <int:queue capacity="10" />
     </int:channel>
     <int:service-activator ref="intService" input-channel="integerChannel"
                            output-channel="aggChannel" method="getEmp" send-timeout="150000">
-        <int:poller receive-timeout="3000" max-messages-per-poll="1" task-executor="threadPoolTaskExecutor" fixed-delay="10">
-        </int:poller>
     </int:service-activator>
 
+    <!--  -->
     <task:executor id="threadPoolTaskExecutor" pool-size="4" queue-capacity="0" keep-alive="2" rejection-policy="CALLER_RUNS"/>
 
     <int:publish-subscribe-channel id="aggChannel">
@@ -75,7 +71,7 @@
     <int:aggregator input-channel="aggChannel" method="aggregatePayloads"
                     ref="groupProcessorAggregator" output-channel="httpGateWayResChannel"
                     message-store="resultMessageStore"
-                    send-partial-result-on-expiry="true">
+                    send-partial-result-on-expiry="false">
     </int:aggregator>
 
     <bean id="resultMessageStore" class="org.springframework.integration.store.SimpleMessageStore" />
