@@ -3,9 +3,11 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/integration https://www.springframework.org/schema/integration/spring-integration.xsd
-		http://www.springframework.org/schema/integration/http https://www.springframework.org/schema/integration/http/spring-integration-http.xsd"
+		http://www.springframework.org/schema/integration/http https://www.springframework.org/schema/integration/http/spring-integration-http.xsd
+        http://www.springframework.org/schema/task https://www.springframework.org/schema/task/spring-task.xsd"
        xmlns:int="http://www.springframework.org/schema/integration"
-       xmlns:int-http="http://www.springframework.org/schema/integration/http">
+       xmlns:int-http="http://www.springframework.org/schema/integration/http"
+       xmlns:task="http://www.springframework.org/schema/task">
 
     <int:channel id="httpGateWayReqChannel"/>
     <int:channel id="httpGateWayResChannel"/>
@@ -35,13 +37,24 @@
         <int:mapping type="java.lang.Integer" channel="integerChannel" />
     </int:payload-type-router>
 
-    <int:channel id="stringChannel" />
+    <int:channel id="stringChannel">
+        <int:queue capacity="10" />
+    </int:channel>
     <int:service-activator ref="stringService" input-channel="stringChannel"
-                           output-channel="aggChannel" method="getEmp" send-timeout="150000"/>
-
-    <int:channel id="integerChannel" />
+                           output-channel="aggChannel" method="getEmp" send-timeout="150000">
+        <int:poller receive-timeout="3000" max-messages-per-poll="1" task-executor="threadPoolTaskExecutor" fixed-delay="10"/>
+    </int:service-activator>
+    
+    <int:channel id="integerChannel">
+        <int:queue capacity="10" />
+    </int:channel>
     <int:service-activator ref="intService" input-channel="integerChannel"
-                           output-channel="aggChannel" method="getEmp" send-timeout="150000"/>
+                           output-channel="aggChannel" method="getEmp" send-timeout="150000">
+        <int:poller receive-timeout="3000" max-messages-per-poll="1" task-executor="threadPoolTaskExecutor" fixed-delay="10">
+        </int:poller>
+    </int:service-activator>
+
+    <task:executor id="threadPoolTaskExecutor" pool-size="4" queue-capacity="0" keep-alive="2" rejection-policy="CALLER_RUNS"/>
 
     <int:publish-subscribe-channel id="aggChannel">
         <int:interceptors>
