@@ -29,9 +29,10 @@ Message Endpoint Purpose:
 
 List of Message Endpoints:
 
-| Endpoint Name | Unidirectional | Bidirectional | Input | Output | Middle | Poll | Listen | Generic | Specific |
+| Endpoint Name | Unidirec | Bidirect | Input | Output | Middle | Poll | Listen | Generic | Specific |
 | --- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
 | **Channel Adapter** | :white_check_mark: | :x: | :white_check_mark: | :white_check_mark: | :x: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| **Service Activator** | :white_check_mark: | :white_check_mark: | :x: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :x: |
 
 * **Channel Adapter** - unidirectional, input/output, poll/listen, generic/tech-specific
 * **Service Activator** - unidirectional/bidirectional, output/middle, poll/listen, generic
@@ -45,8 +46,6 @@ List of Message Endpoints:
 * **Splitter** - unidirectional/bidirectional, **middle**, poll/listen, generic/tech-specific
 * **Aggregator** - unidirectional/bidirectional, **middle**, listen, generic
 
-:white_check_mark:
-:x:
 
 
 
