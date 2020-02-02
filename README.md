@@ -7,13 +7,41 @@ A message endpoints can have any number of (even zero) input and output message 
 <img src="src/docs/images/SpringIntegrationMainConcepts.png" width="900" height="300">
 
 When a message endpoint consumes messages from a message channel: 
-* **poll** - *actively read them*
-* **listen** - *passively receive them*
+* **poll/active** - *actively read them*
+* **listen/passive** - *passively receive them*
 
 Message channels: 
 * **direct channel** - *pass through messages*
 * **queue channel** - *temporarily store them in memory*
 
-Message flow: 
-* **bidirectional** - request-response nature
-* **unidirectional** - fire-and-forget nature
+Message Endpoint Direction: 
+* **bidirectional** - *request-response nature*
+* **unidirectional** - *fire-and-forget nature*
+
+Message Endpoint Placement:
+* **input** - Connects SI flow to upstream external application or internal Java logic
+* **output** - Connects SI flow to downstream external application or internal Java logic
+* **middle** - This component can participate in unidirectional or bidirectional flow
+
+Message Endpoint Purpose:
+* **generic** - Maps the message channel to the java interface or class 
+* **technology-specific** - Connects SI flow to an external system or transport protocol 
+
+List of Message Endpoints:
+* **Channel Adapter** - unidirectional, input/output, poll/listen, generic/tech-specific
+* **Service Activator** - unidirectional/bidirectional, output/middle, poll/listen, generic
+* **Gateway** - unidirectional/bidirectional, output/middle, listen, generic/tech-specific
+* **Transformer** - unidirectional/bidirectional, **middle**, poll/listen, generic/tech-specific
+* **Content Enricher** - unidirectional/bidirectional, **middle**, poll/listen, generic/tech-specific
+* **Filter** - unidirectional/bidirectional, **middle**, poll/listen, generic/tech-specific
+* **Router** - unidirectional/bidirectional, **middle**, listen, generic/tech-specific
+* **Bridge** - unidirectional/bidirectional, **middle**, poll/listen, generic
+* **Chain** - unidirectional/bidirectional, **middle**, listen, generic
+* **Splitter** - unidirectional/bidirectional, **middle**, poll/listen, generic/tech-specific
+* **Aggregator** - unidirectional/bidirectional, **middle**, listen, generic
+
+
+
+
+
+ 
