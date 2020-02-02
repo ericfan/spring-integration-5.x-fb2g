@@ -28,6 +28,10 @@ Message Endpoint Purpose:
 * **technology-specific** - Connects SI flow to an external system or transport protocol 
 
 List of Message Endpoints:
+
+| Endpoint Name | Unidirectional | Bidirectional | Input | Output | Middle | Poll | Listen | Generic | Specific |
+| --- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+
 * **Channel Adapter** - unidirectional, input/output, poll/listen, generic/tech-specific
 * **Service Activator** - unidirectional/bidirectional, output/middle, poll/listen, generic
 * **Gateway** - unidirectional/bidirectional, output/middle, listen, generic/tech-specific
