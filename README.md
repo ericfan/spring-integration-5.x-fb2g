@@ -40,7 +40,8 @@ List of Message Endpoints:
 * **Splitter** - unidirectional/bidirectional, **middle**, poll/listen, generic/tech-specific
 * **Aggregator** - unidirectional/bidirectional, **middle**, listen, generic
 
-
+:white_check_mark:
+:x:
 
 
 
