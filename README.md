@@ -29,10 +29,19 @@ Message Endpoint Purpose:
 
 List of Message Endpoints:
 
-| Endpoint Name | Unidirec | Bidirect | Input | Output | Middle | Poll | Listen | Generic | Specific |
+| Endpoint Name | Unidirec | Bidirec | Input | Output | Middle | Poll | Listen | Generic | Specific |
 | --- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
 | **Channel Adapter** | :white_check_mark: | :x: | :white_check_mark: | :white_check_mark: | :x: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
 | **Service Activator** | :white_check_mark: | :white_check_mark: | :x: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :x: |
+| **Gateway** | :white_check_mark: | :white_check_mark: | :x: | :white_check_mark: | :white_check_mark: | :x: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| **Transformer** | :white_check_mark: | :white_check_mark: | :x: | :x: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| **Content Enricher** | :white_check_mark: | :white_check_mark: | :x: | :x: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| **Filter** | :white_check_mark: | :white_check_mark: | :x: | :x: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| **Router** | :white_check_mark: | :white_check_mark: | :x: | :x: | :white_check_mark: | :x: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| **Bridge** | :white_check_mark: | :white_check_mark: | :x: | :x: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :x: |
+| **Chain** | :white_check_mark: | :white_check_mark: | :x: | :x: | :white_check_mark: | :x: | :white_check_mark: | :white_check_mark: | :x: |
+| **Splitter** | :white_check_mark: | :white_check_mark: | :x: | :x: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| **Aggregator** | :white_check_mark: | :white_check_mark: | :x: | :x: | :white_check_mark: | :x: | :white_check_mark: | :white_check_mark: | :x: |
 
 * **Channel Adapter** - unidirectional, input/output, poll/listen, generic/tech-specific
 * **Service Activator** - unidirectional/bidirectional, output/middle, poll/listen, generic
