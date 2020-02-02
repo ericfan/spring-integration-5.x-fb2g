@@ -33,7 +33,7 @@ List of Message Endpoints:
 | --- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
 | **Channel Adapter** | :white_check_mark: | :x: | :white_check_mark: | :white_check_mark: | :x: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
 | **Service Activator** | :white_check_mark: | :white_check_mark: | :x: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :x: |
-| **Gateway** | :white_check_mark: | :white_check_mark: | :x: | :white_check_mark: | :white_check_mark: | :x: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| **Gateway** | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :x: | :x: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
 | **Transformer** | :white_check_mark: | :white_check_mark: | :x: | :x: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
 | **Content Enricher** | :white_check_mark: | :white_check_mark: | :x: | :x: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
 | **Filter** | :white_check_mark: | :white_check_mark: | :x: | :x: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
@@ -45,7 +45,7 @@ List of Message Endpoints:
 
 * **Channel Adapter** - unidirectional, input/output, poll/listen, generic/tech-specific
 * **Service Activator** - unidirectional/bidirectional, output/middle, poll/listen, generic
-* **Gateway** - unidirectional/bidirectional, output/middle, listen, generic/tech-specific
+* **Gateway** - unidirectional/bidirectional, input/output, listen, generic/tech-specific
 * **Transformer** - unidirectional/bidirectional, **middle**, poll/listen, generic/tech-specific
 * **Content Enricher** - unidirectional/bidirectional, **middle**, poll/listen, generic/tech-specific
 * **Filter** - unidirectional/bidirectional, **middle**, poll/listen, generic/tech-specific
