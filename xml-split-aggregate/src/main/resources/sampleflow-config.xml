@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/integration https://www.springframework.org/schema/integration/spring-integration.xsd
+		http://www.springframework.org/schema/integration/http https://www.springframework.org/schema/integration/http/spring-integration-http.xsd
+        http://www.springframework.org/schema/task https://www.springframework.org/schema/task/spring-task.xsd"
+       xmlns:int="http://www.springframework.org/schema/integration"
+       xmlns:int-http="http://www.springframework.org/schema/integration/http"
+       xmlns:task="http://www.springframework.org/schema/task">
+
+    <int:channel id="httpGateWayReqChannel"/>
+    <int:channel id="httpGateWayResChannel"/>
+
+    <int-http:inbound-gateway id="httpGateWay"
+                              supported-methods="GET, POST"
+                              request-channel="httpGateWayReqChannel"
+                              reply-channel="httpGateWayResChannel"
+                              mapped-response-headers="Return-Status, Return-Status-Msg, HTTP_RESPONSE_HEADERS"
+                              path="/employee"
+                              reply-timeout="150000">
+    </int-http:inbound-gateway>
+
+    <!-- Custom splitter. -->
+    <int:splitter id="splitter" input-channel="httpGateWayReqChannel" output-channel="splitterChannel" ref="searchRequestSplitter">
+    </int:splitter>
+
+    <!-- Splitter channel. -->
+    <int:channel id="splitterChannel">
+        <int:interceptors>
+            <ref bean="messageInterceptor"/>
+        </int:interceptors>
+    </int:channel>
+
+    <int:payload-type-router input-channel="splitterChannel">
+        <int:mapping type="java.lang.String" channel="stringChannel" />
+        <int:mapping type="java.lang.Integer" channel="integerChannel" />
+    </int:payload-type-router>
+
+    <int:channel id="stringChannel">
+    </int:channel>
+    <int:service-activator ref="stringService" input-channel="stringChannel"
+                           output-channel="aggChannel" method="getEmp" send-timeout="150000">
+    </int:service-activator>
+    
+    <int:channel id="integerChannel">
+    </int:channel>
+    <int:service-activator ref="intService" input-channel="integerChannel"
+                           output-channel="aggChannel" method="getEmp" send-timeout="150000">
+    </int:service-activator>
+
+    <!--  -->
+    <task:executor id="threadPoolTaskExecutor" pool-size="4" queue-capacity="0" keep-alive="2" rejection-policy="CALLER_RUNS"/>
+
+    <int:publish-subscribe-channel id="aggChannel">
+        <int:interceptors>
+            <ref bean="messageInterceptor"/>
+        </int:interceptors>
+    </int:publish-subscribe-channel>
+
+    <!-- POJO used for aggregation. -->
+    <!--
+    <int:aggregator input-channel="aggChannel" method="aggregate"
+                    ref="poJoAggregator" output-channel="httpGateWayResChannel"
+                    message-store="resultMessageStore"
+                    send-partial-result-on-expiry="true">
+    </int:aggregator>
+    -->
+
+    <!-- Custom MessageGroupProcessor used for aggregation.  -->
+    <int:aggregator input-channel="aggChannel" method="aggregatePayloads"
+                    ref="groupProcessorAggregator" output-channel="httpGateWayResChannel"
+                    message-store="resultMessageStore"
+                    send-partial-result-on-expiry="false">
+    </int:aggregator>
+
+    <bean id="resultMessageStore" class="org.springframework.integration.store.SimpleMessageStore" />
+</beans>

@@ -4,7 +4,7 @@ This is a personal project to show different scenarios in Spring Integration wit
 # Main Concept
 Messages are exchanged between message endpoints via message channels. 
 A message endpoints can have any number of (even zero) input and output message channels. 
-<img src="src/docs/images/SpringIntegrationMainConcepts.png" width="900" height="300">
+<img src="docs/images/SpringIntegrationMainConcepts.png" width="900" height="300">
 
 When a message endpoint consumes messages from a message channel: 
 * **poll/active** - *actively read them*
