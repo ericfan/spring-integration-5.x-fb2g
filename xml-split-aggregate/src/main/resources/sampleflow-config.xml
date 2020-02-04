@@ -52,11 +52,11 @@
     <!--  -->
     <task:executor id="threadPoolTaskExecutor" pool-size="4" queue-capacity="0" keep-alive="2" rejection-policy="CALLER_RUNS"/>
 
-    <int:publish-subscribe-channel id="aggChannel">
+    <int:channel id="aggChannel">
         <int:interceptors>
             <ref bean="messageInterceptor"/>
         </int:interceptors>
-    </int:publish-subscribe-channel>
+    </int:channel>
 
     <!-- POJO used for aggregation. -->
     <!--
