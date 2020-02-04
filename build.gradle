@@ -1,36 +1,30 @@
 plugins {
-	id 'org.springframework.boot' version '2.1.12.RELEASE'
-	id 'io.spring.dependency-management' version '1.0.8.RELEASE'
-	id 'java'
+	id "io.spring.dependency-management" version "1.0.8.RELEASE"
 }
 
-group = 'com.example'
-version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '1.8'
+configure(allprojects) { project ->
+}
 
-configurations {
-	developmentOnly
-	runtimeClasspath {
-		extendsFrom developmentOnly
+subprojects {
+	group = 'com.example.fb2g'
+
+	apply plugin: 'java'
+	apply plugin: 'io.spring.dependency-management'
+	apply plugin: 'java-library'
+
+	repositories {
+		mavenCentral()
 	}
-}
 
-repositories {
-	mavenCentral()
-}
+	dependencyManagement {
+		imports {
+			mavenBom("org.springframework.boot:spring-boot-dependencies:2.1.7.RELEASE")
+		}
+	}
 
-dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-actuator'
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.springframework.boot:spring-boot-starter-integration'
-	implementation 'org.springframework.integration:spring-integration-file:5.1.9.RELEASE'
-	implementation 'org.springframework.integration:spring-integration-http:5.1.9.RELEASE'
-	implementation 'org.springframework.integration:spring-integration-xml:5.1.9.RELEASE'
-	implementation 'org.springframework.integration:spring-integration-scripting:5.1.9.RELEASE'
-	implementation 'org.springframework.integration:spring-integration-security:5.1.9.RELEASE'
-	implementation(group: 'org.apache.commons', name: 'commons-lang3', version: '3.9')
+	compileJava {
+		sourceCompatibility = 1.8
+		targetCompatibility = 1.8
+	}
 
-	developmentOnly 'org.springframework.boot:spring-boot-devtools'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testImplementation 'org.springframework.integration:spring-integration-test'
 }
