@@ -63,16 +63,58 @@ List of Message Endpoints:
 
 **Message Channel Async:**
 
-| Channel Type | Sync | Async |
-| --- | :---: | :---: |
-| **Direct Channel** | :white_check_mark: | :x: |
-| **Queue Channel** | :x: | :white_check_mark: |
-| **Priority Channel** | :x: | :white_check_mark: |
-| **Executor Channel** | :x: | :white_check_mark: |
-| **Rendezvous Channel** | :x: | :white_check_mark: |
-| **PublishSubscribe Channel** | :white_check_mark: | :white_check_mark: |
+| Channel Type | Sync | Async | P2P | Pub/Sub | 
+| --- | :---: | :---: | :---: | :---: |
+| **Direct Channel** | :white_check_mark: | :x: | :white_check_mark: | :x: |
+| **Queue Channel** | :x: | :white_check_mark: | :white_check_mark: | :x: |
+| **Priority Channel** | :x: | :white_check_mark: | :white_check_mark: | :x: |
+| **Executor Channel** | :x: | :white_check_mark: | :white_check_mark: | :x: |
+| **Rendezvous Channel** | :white_check_mark: | :white_check_mark: | :white_check_mark: | :x: |
+| **PublishSubscribe Channel** | :white_check_mark: | :white_check_mark: | :x: | :white_check_mark: |
 
-* **direct channel** - *pass through messages*
-* **queue channel** - *temporarily store them in memory*
+**Message Channel ShowCase**
 
- 
+**Direct Channel**
+```xml
+<int:channel>
+</int:channel>
+```
+
+**Queue Channel**
+```xml
+<int:channel>
+    <int:queue capacity="10"/>
+</int:channel>
+```
+
+**Priority Channel**
+```xml
+<int:channel>
+    <int:priority-queue capacity="10" comparator="CustomBean"/>
+</int:channel>
+```
+
+**Rendezvous Channel**
+```xml
+<int:channel>
+    <int:renderzvous-queue />
+</int:channel>
+```
+
+**Executor Channel**
+```xml
+<int:channel>
+    <int:dispatcher task-executor="executor" />
+</int:channel>
+```
+
+**PublishSubscribeChannel Sync**
+```xml
+<int:publish-subscribe-channel/>
+```
+
+**PublishSubscribeChannel ASync**
+```xml
+<int:publish-subscribe-channel task-executor="executor" />
+```
+
