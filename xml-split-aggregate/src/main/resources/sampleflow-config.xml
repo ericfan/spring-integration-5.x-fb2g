@@ -22,33 +22,21 @@
     </int-http:inbound-gateway>
 
     <!-- Custom splitter. -->
-    <int:splitter id="splitter" input-channel="httpGateWayReqChannel" output-channel="splitterChannel" ref="searchRequestSplitter">
+    <int:splitter id="splitter" input-channel="httpGateWayReqChannel" output-channel="splitterChannel" ref="searchRequestSplitter" >
     </int:splitter>
 
     <!-- Splitter channel. -->
     <int:channel id="splitterChannel">
+        <int:dispatcher task-executor="threadPoolTaskExecutor" load-balancer=""/>
         <int:interceptors>
             <ref bean="messageInterceptor"/>
         </int:interceptors>
     </int:channel>
 
-    <int:payload-type-router input-channel="splitterChannel">
-        <int:mapping type="java.lang.String" channel="stringChannel" />
-        <int:mapping type="java.lang.Integer" channel="integerChannel" />
-    </int:payload-type-router>
-
-    <int:channel id="stringChannel">
-    </int:channel>
-    <int:service-activator ref="stringService" input-channel="stringChannel"
+    <int:service-activator ref="writeService" input-channel="splitterChannel"
                            output-channel="aggChannel" method="getEmp" send-timeout="150000">
     </int:service-activator>
     
-    <int:channel id="integerChannel">
-    </int:channel>
-    <int:service-activator ref="intService" input-channel="integerChannel"
-                           output-channel="aggChannel" method="getEmp" send-timeout="150000">
-    </int:service-activator>
-
     <!--  -->
     <task:executor id="threadPoolTaskExecutor" pool-size="4" queue-capacity="0" keep-alive="2" rejection-policy="CALLER_RUNS"/>
 
