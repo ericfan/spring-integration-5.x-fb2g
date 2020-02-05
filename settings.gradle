@@ -1,7 +1,7 @@
 include 'router:xml-generic-router'
 include 'xml-split-aggregate'
 
-rootProject.name='spring-integration-5.x-splitaggregate'
+rootProject.name='spring-integration-5.x-fb2g'
 rootProject.children.each {project ->
     project.buildFileName = "${project.name}.gradle"
 }
