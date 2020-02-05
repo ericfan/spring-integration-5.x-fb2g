@@ -6,6 +6,9 @@
 * **XPath Router**
 * **Error Message Exception Type Router**
 
+**SI 5.1.7 Router inheritance structure**
+<img src="docs/images/RouterChannelHirarchy.png" width="800" height="572">
+
 **Router Configuration Attributes Outside Chain**
 
 | Attribute | Generic <br> Router | Header Value <br> Router | XPath <br> Router | Payload Type <br> Router | Recipient List <br>Router | Exception Type <br> Router |
