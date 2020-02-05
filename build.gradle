@@ -6,7 +6,7 @@ configure(allprojects) { project ->
 }
 
 subprojects {
-	group = 'com.example.fb2g'
+	group = 'com.example.splitaggregate'
 
 	apply plugin: 'java'
 	apply plugin: 'io.spring.dependency-management'

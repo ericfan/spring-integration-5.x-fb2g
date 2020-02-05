@@ -1,6 +1,6 @@
-package com.example.fb2g.controller;
+package com.example.splitaggregate.controller;
 
-import com.example.fb2g.bean.SampleBean;
+import com.example.splitaggregate.bean.SampleBean;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 

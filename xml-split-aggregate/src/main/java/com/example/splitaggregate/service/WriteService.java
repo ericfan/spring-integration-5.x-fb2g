@@ -1,7 +1,7 @@
-package com.example.fb2g.service;
+package com.example.splitaggregate.service;
 
-import com.example.fb2g.bean.IntBean;
-import com.example.fb2g.bean.StringBean;
+import com.example.splitaggregate.bean.IntBean;
+import com.example.splitaggregate.bean.StringBean;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.slf4j.Logger;

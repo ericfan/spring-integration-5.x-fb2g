@@ -1,4 +1,4 @@
-package com.example.fb2g.bean;
+package com.example.splitaggregate.bean;
 
 public class ResponseBean {
     private String resStr;

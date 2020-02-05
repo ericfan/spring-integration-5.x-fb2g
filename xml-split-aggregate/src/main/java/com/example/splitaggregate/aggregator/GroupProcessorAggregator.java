@@ -1,8 +1,8 @@
-package com.example.fb2g.aggregator;
+package com.example.splitaggregate.aggregator;
 
-import com.example.fb2g.bean.IntBean;
-import com.example.fb2g.bean.ResponseBean;
-import com.example.fb2g.bean.StringBean;
+import com.example.splitaggregate.bean.IntBean;
+import com.example.splitaggregate.bean.ResponseBean;
+import com.example.splitaggregate.bean.StringBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.integration.aggregator.AbstractAggregatingMessageGroupProcessor;

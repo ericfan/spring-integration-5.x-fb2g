@@ -1,4 +1,4 @@
-package com.example.fb2g.splitter;
+package com.example.splitaggregate.splitter;
 
 import org.springframework.integration.splitter.AbstractMessageSplitter;
 import org.springframework.messaging.Message;

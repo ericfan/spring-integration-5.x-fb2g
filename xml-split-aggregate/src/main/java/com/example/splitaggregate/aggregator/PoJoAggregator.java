@@ -1,9 +1,8 @@
-package com.example.fb2g.aggregator;
+package com.example.splitaggregate.aggregator;
 
-import com.example.fb2g.bean.IntBean;
-import com.example.fb2g.bean.ResponseBean;
-import com.example.fb2g.bean.SampleBean;
-import com.example.fb2g.bean.StringBean;
+import com.example.splitaggregate.bean.IntBean;
+import com.example.splitaggregate.bean.ResponseBean;
+import com.example.splitaggregate.bean.StringBean;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package com.example.fb2g;
+package com.example.splitaggregate;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

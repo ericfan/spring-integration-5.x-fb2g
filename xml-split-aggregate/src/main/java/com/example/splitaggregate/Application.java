@@ -1,4 +1,4 @@
-package com.example.fb2g;
+package com.example.splitaggregate;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
