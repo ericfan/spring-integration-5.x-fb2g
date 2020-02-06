@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/integration https://www.springframework.org/schema/integration/spring-integration.xsd
+		http://www.springframework.org/schema/integration/http https://www.springframework.org/schema/integration/http/spring-integration-http.xsd"
+       xmlns:int="http://www.springframework.org/schema/integration"
+       xmlns:int-http="http://www.springframework.org/schema/integration/http">
+
+    <int:channel id="httpGateWayReqChannel"/>
+    <int:channel id="httpGateWayResChannel"/>
+
+    <int-http:inbound-gateway id="httpGateWay"
+                              supported-methods="GET, POST"
+                              request-channel="httpGateWayReqChannel"
+                              reply-channel="httpGateWayResChannel"
+                              mapped-response-headers="Return-Status, Return-Status-Msg, HTTP_RESPONSE_HEADERS"
+                              path="/router/generic"
+                              reply-timeout="150000">
+    </int-http:inbound-gateway>
+
+    <int:router input-channel="httpGateWayReqChannel" id="genericRouter" ref="customGenericRouter" method="route">
+        <int:mapping value="a" channel="" />
+        <int:mapping value="b" channel="" />
+        <int:mapping value="c" channel="" />
+    </int:router>
+
+    <int:service-activator ref="writeService" input-channel="splitterChannel"
+                           output-channel="aggChannel" method="getEmp" send-timeout="150000">
+    </int:service-activator>
+
+</beans>

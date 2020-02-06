@@ -37,7 +37,6 @@
                            output-channel="aggChannel" method="getEmp" send-timeout="150000">
     </int:service-activator>
     
-    <!--  -->
     <task:executor id="threadPoolTaskExecutor" pool-size="4" queue-capacity="0" keep-alive="2" rejection-policy="CALLER_RUNS"/>
 
     <int:channel id="aggChannel">
