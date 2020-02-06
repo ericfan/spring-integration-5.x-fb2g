@@ -6,7 +6,7 @@ configure(allprojects) { project ->
 }
 
 subprojects {
-	group = 'com.example.fb2g'
+	group = 'com.example.splitaggregate'
 
 	apply plugin: 'java'
 	apply plugin: 'io.spring.dependency-management'
@@ -25,6 +25,15 @@ subprojects {
 	compileJava {
 		sourceCompatibility = 1.8
 		targetCompatibility = 1.8
+	}
+
+	dependencies {
+		implementation 'org.springframework.boot:spring-boot-starter-actuator'
+		implementation 'org.springframework.boot:spring-boot-starter-integration'
+		implementation(group: 'org.apache.commons', name: 'commons-lang3', version: '3.9')
+
+		testImplementation 'org.springframework.boot:spring-boot-starter-test'
+		testImplementation 'org.springframework.integration:spring-integration-test'
 	}
 
 }

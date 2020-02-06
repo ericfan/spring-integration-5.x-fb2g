@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/integration https://www.springframework.org/schema/integration/spring-integration.xsd"
+       xmlns:int="http://www.springframework.org/schema/integration">
+
+    <int:channel id="inChannel" />
+
+    <int:gateway default-request-channel="inChannel" service-interface="com.example.router.service.SIWrapperService"/>
+
+    <int:router input-channel="inChannel" id="genericRouter" ref="pojoGenericRouter" method="route">
+    </int:router>
+
+    <int:channel id="routeChannel"/>
+    <int:channel id="defaultChannel"/>
+
+    <int:service-activator ref="defaultService" input-channel="defaultChannel" method="write">
+    </int:service-activator>
+
+    <int:service-activator ref="routeService" input-channel="routeChannel" method="write">
+    </int:service-activator>
+
+</beans>
