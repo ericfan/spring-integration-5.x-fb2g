@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/integration https://www.springframework.org/schema/integration/spring-integration.xsd"
+       xmlns:int="http://www.springframework.org/schema/integration">
+
+    <import resource="classpath:generic-router-config.xml" />
+
+    <int:channel id="inChannel" />
+
+    <int:router input-channel="inChannel" id="genericRouter" ref="pojoGenericRouter" method="route">
+    </int:router>
+
+    <int:channel id="routeChannel">
+    </int:channel>
+    <int:channel id="defaultChannel">
+    </int:channel>
+
+    <bean id="pojoGenericRouter" class="com.example.router.routers.PojoGenericRouter" />
+</beans>
