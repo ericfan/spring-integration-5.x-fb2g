@@ -7,6 +7,9 @@ import org.springframework.stereotype.Component;
 
 import java.util.Collection;
 
+/**
+ * @author lei.fan
+ */
 @Component
 public class CustomGenericRouter extends AbstractMessageRouter {
 
