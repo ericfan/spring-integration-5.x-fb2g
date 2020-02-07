@@ -1,4 +1,5 @@
 include 'router:xml-generic-router'
+include 'router:xml-xpath-router'
 include 'xml-split-aggregate'
 
 rootProject.name='spring-integration-5.x-fb2g'
