@@ -3,6 +3,9 @@ package com.example.router.routers;
 import org.springframework.integration.annotation.Router;
 import org.springframework.stereotype.Component;
 
+/**
+ * @author lei.fan
+ */
 @Component
 public class PojoGenericRouter {
 

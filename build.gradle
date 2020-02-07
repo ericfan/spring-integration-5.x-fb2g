@@ -1,39 +1,33 @@
 plugins {
-	id "io.spring.dependency-management" version "1.0.8.RELEASE"
-}
-
-configure(allprojects) { project ->
+    id "io.spring.dependency-management" version "1.0.8.RELEASE"
 }
 
 subprojects {
-	group = 'com.example.splitaggregate'
+    apply plugin: 'java'
+    apply plugin: 'io.spring.dependency-management'
+    apply plugin: 'java-library'
 
-	apply plugin: 'java'
-	apply plugin: 'io.spring.dependency-management'
-	apply plugin: 'java-library'
+    repositories {
+        mavenCentral()
+    }
 
-	repositories {
-		mavenCentral()
-	}
+    dependencyManagement {
+        imports {
+            mavenBom("org.springframework.boot:spring-boot-dependencies:2.1.7.RELEASE")
+        }
+    }
 
-	dependencyManagement {
-		imports {
-			mavenBom("org.springframework.boot:spring-boot-dependencies:2.1.7.RELEASE")
-		}
-	}
+    compileJava {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+    }
 
-	compileJava {
-		sourceCompatibility = 1.8
-		targetCompatibility = 1.8
-	}
+    dependencies {
+        implementation 'org.springframework.boot:spring-boot-starter-actuator'
+        implementation 'org.springframework.boot:spring-boot-starter-integration'
+        implementation(group: 'org.apache.commons', name: 'commons-lang3', version: '3.9')
 
-	dependencies {
-		implementation 'org.springframework.boot:spring-boot-starter-actuator'
-		implementation 'org.springframework.boot:spring-boot-starter-integration'
-		implementation(group: 'org.apache.commons', name: 'commons-lang3', version: '3.9')
-
-		testImplementation 'org.springframework.boot:spring-boot-starter-test'
-		testImplementation 'org.springframework.integration:spring-integration-test'
-	}
-
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+        testImplementation 'org.springframework.integration:spring-integration-test'
+    }
 }
