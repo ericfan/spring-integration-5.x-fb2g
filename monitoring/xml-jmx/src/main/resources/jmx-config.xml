@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:int="http://www.springframework.org/schema/integration"
+       xmlns:int-jmx="http://www.springframework.org/schema/integration/jmx"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/integration https://www.springframework.org/schema/integration/spring-integration.xsd
+        http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/integration/jmx https://www.springframework.org/schema/integration/jmx/spring-integration-jmx.xsd">
+
+<!--    <context:mbean-server/>-->
+    <context:mbean-export />
+    <int-jmx:mbean-export id="integrationMBeanExporter"
+                          default-domain="JXMSample" server="mbeanServer"/>
+
+    <bean id="mbeanServer" class="org.springframework.jmx.support.MBeanServerFactoryBean">
+        <property name="locateExistingServerIfPossible" value="true"/>
+    </bean>
+
+    <int:channel id="inChannel">
+        <int:queue capacity="4" />
+    </int:channel>
+
+    <int:gateway default-request-channel="inChannel" service-interface="com.example.jmx.service.SIWrapperService" />
+
+    <int:service-activator ref="writeService" input-channel="inChannel" method="write" >
+        <int:poller fixed-rate="1000">
+        </int:poller>
+    </int:service-activator>
+
+</beans>
