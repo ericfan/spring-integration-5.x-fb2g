@@ -1,3 +1,5 @@
+include 'monitoring:control-bus'
+include 'monitoring:jmx'
 include 'router:xml-generic-router'
 include 'xml-split-aggregate'
 
