@@ -1,5 +1,6 @@
 include 'monitoring:xml-control-bus'
 include 'monitoring:xml-jmx'
+include 'enricher:xml-payload-enricher'
 include 'router:xml-generic-router'
 include 'xml-split-aggregate'
 
