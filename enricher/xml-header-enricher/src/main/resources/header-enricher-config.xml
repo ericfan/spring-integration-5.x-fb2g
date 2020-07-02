@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/integration https://www.springframework.org/schema/integration/spring-integration.xsd"
+       xmlns:int="http://www.springframework.org/schema/integration">
+
+    <int:channel id="inputChannel" />
+
+    <int:gateway default-request-channel="inputChannel" service-interface="com.example.enricher.service.SIWrapperService"/>
+
+    <int:header-enricher input-channel="inputChannel" output-channel="outputChannel" ref="customHeaderEnricher" method="processMessage">
+    </int:header-enricher>
+
+    <int:channel id="outputChannel"/>
+
+    <int:service-activator ref="defaultService" input-channel="outputChannel" method="write">
+    </int:service-activator>
+
+</beans>
