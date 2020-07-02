@@ -1,6 +1,7 @@
 include 'monitoring:xml-control-bus'
 include 'monitoring:xml-jmx'
 include 'router:xml-generic-router'
+include 'enricher:xml-header-enricher'
 include 'xml-split-aggregate'
 
 rootProject.name='spring-integration-5.x-fb2g'
